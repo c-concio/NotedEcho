@@ -14,3 +14,45 @@ a {
 * {
   box-sizing: border-box;
 }
+
+
+.cdx-block{
+  width: 100%;
+  max-width: 100% !important;
+}
+
+.ce-block__content, .ce-toolbar__content { 
+  max-width:calc(100% - 80px) !important; 
+} 
+
+.box-border{
+  border-color: black;
+  border: 1px solid black;
+  box-shadow: 10px 10px;
+  margin: 16px;
+}
+
+#editor-div{
+  width: 75%;
+  overflow: scroll;
+}
+
+#block-div{
+  padding: 10px;
+  flex:1;
+}
+
+.flex-row{
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+  max-height: 100vh;
+}
+
+.flex-col{
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 25%;
+}
+
