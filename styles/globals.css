@@ -33,15 +33,34 @@ a {
 }
 
 #editor-div{
-  overflow: scroll;
+  overflow: auto;
   flex-grow: 1;
 
 }
 
-#block-div{
+.block-div{
   padding: 10px;
-  flex:1;
+  flex: 1 1 0px;
+  overflow: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(170, 170, 170, 0.4) white;
 }
+
+.block-div::-webkit-scrollbar-thumb{
+  background: rgba(228, 228, 228, 0.6);
+  border-radius: 10px;
+}
+
+.block-div::-webkit-scrollbar{
+  width:8px;
+  height:8px;
+}
+
+.block-div::-webkit-scrollbar-track{
+  border-radius: 10px;
+  visibility: hidden;
+}
+
 
 .flex-row{
   display: flex;
@@ -59,7 +78,12 @@ a {
 #toolbar{
   flex-basis: 40px;
   margin: 16px;
+  margin-bottom: 0;
   padding: 10px;
+}
+
+#toolbarButtons{
+  float: right;
 }
 
 .left-col{
@@ -69,3 +93,4 @@ a {
 .right-col{
   width: 75%;
 }
+

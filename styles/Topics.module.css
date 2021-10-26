@@ -1,0 +1,16 @@
+#topicsList{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.listItem{
+    float: left;
+    padding: 8px;
+    margin: 2px;
+    border: 2px solid orange;
+    border-radius: 16px;
+    background-color: orange;
+    font-size: small;
+    cursor: default;
+}
