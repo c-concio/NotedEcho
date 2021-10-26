@@ -3,6 +3,7 @@ import Block from '../component/Block';
 import Toolbar from '../component/Toolbar';
 import React from 'react';
 import { changeTopicFunction } from '../component/Topics';
+import { setTranscriptFunction } from '../component/Transcript';
 
 import dynamic from 'next/dynamic';
 const EditorJsWithSSR = dynamic(() => import("../component/Editor"), {ssr : false,});
@@ -97,6 +98,7 @@ export default class Main extends React.Component {
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
+        setTranscriptFunction(data.messages);
       })
       .catch((err) => {
         console.log(err);

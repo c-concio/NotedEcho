@@ -25,7 +25,7 @@ export default class Transcript extends React.Component{
             <div>
                 {
                     this.state.messages.map((element, index) => {
-                        return (<p>{element}</p>);
+                        return (<p key={`message${index}`}>{element.text}</p>);
                     })
                 }
             </div>
