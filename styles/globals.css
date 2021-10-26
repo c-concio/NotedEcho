@@ -33,8 +33,9 @@ a {
 }
 
 #editor-div{
-  width: 75%;
   overflow: scroll;
+  flex-grow: 1;
+
 }
 
 #block-div{
@@ -53,6 +54,18 @@ a {
   display: flex;
   flex-direction: column;
   height: 100vh;
+}
+
+#toolbar{
+  flex-basis: 40px;
+  margin: 16px;
+  padding: 10px;
+}
+
+.left-col{
   width: 25%;
 }
 
+.right-col{
+  width: 75%;
+}
