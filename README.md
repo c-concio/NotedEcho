@@ -26,3 +26,5 @@ ASTRA_DB_REGION=""
 ASTRA_DB_KEYSPACE=""
 ASTRA_DB_APPLICATION_TOKEN=""
 ```
+
+Once done, simiply open a terminal at the root directory and ```run dev start``` for the development version
