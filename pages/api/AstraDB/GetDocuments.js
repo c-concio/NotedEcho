@@ -1,8 +1,10 @@
 import axios from "axios";
-import { baseAstraUrl, astraKeyspace } from "../../../serverVars";
+import { baseAstraUrl, astraKeyspace, collection } from "../../../serverVars";
 
 export default async function handler(req, res){
-    await axios.get(`${baseAstraUrl}/api/rest/v2/namespaces/${process.env.ASTRA_DB_KEYSPACE}/collections/`, 
+
+    console.log(baseAstraUrl)
+    await axios.get(`${baseAstraUrl}/api/rest/v2/namespaces/${process.env.ASTRA_DB_KEYSPACE}/collections/${collection}`, 
     {
         headers: {
             "X-Cassandra-Token": process.env.ASTRA_DB_APPLICATION_TOKEN,

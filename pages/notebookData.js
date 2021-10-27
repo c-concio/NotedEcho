@@ -3,13 +3,13 @@ export var topics;
 export var notes;
 
 export function setTranscriptData(script){
-    this.transcript = script;
+    transcript = script;
 }
 
 export function setTopicsData(topic){
-    this.topics = topic;
+    topics = topic;
 }
 
 export function setNotesData(note){
-    this.notes = note;
+    notes = note;
 }

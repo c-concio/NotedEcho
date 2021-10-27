@@ -83,6 +83,8 @@ a {
 
 #toolbarButtons{
   float: right;
+  align-self:center;
+  justify-content: center;
 }
 
 .left-col{
@@ -141,3 +143,9 @@ a {
   animation-iteration-count: infinite;
 }
 
+#notebookTitle{
+  margin-bottom: 0;
+  margin-top: 0;
+  margin-right: 16px;
+  width: max-content;
+}

@@ -6,6 +6,7 @@ import { changeTopicFunction } from '../component/Topics';
 import { setTranscriptFunction } from '../component/Transcript';
 import SpeechToText from '../component/SpeechToText';
 import { setNotesData } from './notebookData';
+import { transcript, topics, notes } from './notebookData';
 
 import dynamic from 'next/dynamic';
 const EditorJsWithSSR = dynamic(() => import("../component/Editor"), {ssr : false,});
@@ -34,14 +35,27 @@ export default class Main extends React.Component {
     }
   }
 
-  onClickSave() {
+  async onClickSave() {
     console.log("Clicked save button");
-    editorInstance.save().then((output) => {
+    await editorInstance.save().then((output) => {
         console.log(output);
         setNotesData(output);
+
     }).catch(err => {
         console.log(err);
     });
+
+    // send to the database
+    await fetch('./api/AstraDB/PostDocument', {
+      method: 'POST',
+      body: JSON.stringify({
+        title: document.getElementById("notebookTitle").textContent,
+        transcript: transcript,
+        notes: notes,
+        topics: topics
+      })
+    });
+
   }
 
   onClickLoad() {

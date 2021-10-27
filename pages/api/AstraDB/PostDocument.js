@@ -1,12 +1,22 @@
 import axios from "axios";
-import { baseAstraUrl, astraKeyspace } from "../../../serverVars";
+import { baseAstraUrl, astraKeyspace, collection } from "../../../serverVars";
 
 export default async function (req, res){
 
     // post into db the transcript, topics, and notes
 
-    await axios.post(`${baseAstraUrl}/api/rest/v2/namespaces/${process.env.ASTRA_DB_KEYSPACE}/collections/sampleCollection`, 
-    {"id": "some-stuff", "other": "nonsensical data"},
+    console.log("request:")
+    res.status(200).send("ok");
+    let reqBody = JSON.parse(req.body);
+
+    let data = {
+        notes: reqBody.notes,
+        transcript: reqBody.transcript,
+        topics: reqBody.topics
+    };
+
+    await axios.put(`${baseAstraUrl}/api/rest/v2/namespaces/${process.env.ASTRA_DB_KEYSPACE}/collections/${collection}/${reqBody.title}`, 
+    data,
     {
         headers: {
             "X-Cassandra-Token": process.env.ASTRA_DB_APPLICATION_TOKEN,
@@ -14,11 +24,11 @@ export default async function (req, res){
         }
     }).then((msg) => {
         console.log("OK");
-        console.log(msg.data);  
-        res.status(200).send(msg.data);
+        console.log(msg);
+        // res.status(200).send(msg);
     }).catch((err) => {
         console.log(err);
-        res.status(400).send(err);
+        // res.status(400).send(err);
     })
 
 }
