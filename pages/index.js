@@ -5,7 +5,7 @@ import React from 'react';
 import { changeTopicFunction } from '../component/Topics';
 import { setTranscriptFunction } from '../component/Transcript';
 import SpeechToText from '../component/SpeechToText';
-import { setNotesData } from './notebookData';
+import { setNotesData, setTopicsData } from './notebookData';
 import { transcript, topics, notes } from './notebookData';
 import LoadNotebook from '../component/LoadNotebook';
 
@@ -28,6 +28,7 @@ export default class Main extends React.Component {
     this.onClickViewNotebooks = this.onClickViewNotebooks.bind(this);
     this.onClickLoadNotebookBackground = this.onClickLoadNotebookBackground.bind(this);
     this.onClickDeleteButton = this.onClickDeleteButton.bind(this);
+    this.onClickNewNotebook = this.onClickNewNotebook.bind(this);
 
     this.state = {
       showLoadNotebook: false
@@ -36,7 +37,8 @@ export default class Main extends React.Component {
     this.onClickFunctions = {
       onClickSave: this.onClickSave,
       onClickViewNotebooks: this.onClickViewNotebooks,
-      onClickDeleteButton: this.onClickDeleteButton
+      onClickDeleteButton: this.onClickDeleteButton,
+      onClickNewNotebook: this.onClickNewNotebook
     }
 
   }
@@ -104,10 +106,12 @@ export default class Main extends React.Component {
       }
       if(data.hasOwnProperty("topics")){
         changeTopicFunction(data.topics);
-      }
+      } else
+        changeTopicFunction([]);
       if(data.hasOwnProperty("transcript")){
         setTranscriptFunction(data.transcript);
-      }
+      } else
+        setTranscriptFunction([]);
       document.getElementById("notebookTitle").textContent = d.documentId;
     });
   }
@@ -128,7 +132,14 @@ export default class Main extends React.Component {
     })
   }
 
-
+  onClickNewNotebook() {
+    setTranscriptFunction([]);
+    setTopicsData([]);
+    setNotesData({blocks: []});
+    
+    editorInstance.clear();
+    document.getElementById("notebookTitle").textContent = "New Notebook";
+  }
 
   render() {
     return (

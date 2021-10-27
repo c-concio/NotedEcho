@@ -59,6 +59,7 @@ export default class Toolbar extends React.Component{
                         <button onClick={this.onClickEditButton}>Edit</button>}
                 </div>
                 <div id="toolbarButtons">
+                    <button onClick={this.props.onClickFunctions.onClickNewNotebook}>New Notebook</button>
                     <button onClick={this.props.onClickFunctions.onClickSave}>Save</button>
                     <button onClick={this.props.onClickFunctions.onClickDeleteButton}>Delete</button>
                     <button onClick={this.props.onClickFunctions.onClickViewNotebooks}>View Notebooks</button>
