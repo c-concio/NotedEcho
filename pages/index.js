@@ -119,9 +119,7 @@ export default class Main extends React.Component {
 
   async onClickDeleteButton() {
     console.log("clicked")
-    editorInstance.save().then((data) => {
-      console.log(data)
-    })
+
     await fetch('./api/AstraDB/DeleteDocument', {
         method: 'POST',
         body: JSON.stringify({
@@ -130,6 +128,8 @@ export default class Main extends React.Component {
     }).then((msg) => {
         document.getElementById("notebookTitle").textContent = "New Notebook";
         editorInstance.clear();
+        setTranscriptFunction([]);
+        changeTopicFunction([]);
     })
   }
 
