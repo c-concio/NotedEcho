@@ -1,4 +1,5 @@
 import React from "react"
+import { setTranscriptData } from "../pages/notebookData";
 
 export var setTranscriptFunction;
 
@@ -19,6 +20,7 @@ export default class Transcript extends React.Component{
 
     setTranscript(msg) {
         console.log("set transcript");
+        setTranscriptData(msg);
         this.setState({
             messages: msg
         });

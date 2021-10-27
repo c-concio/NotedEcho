@@ -7,6 +7,7 @@ var recorder;
 
 var messageData = [];
 var topicsData = [];
+var stream;
 
 async function connectToWS(authToken) {
     // stream speech to text
@@ -76,7 +77,7 @@ async function connectToWS(authToken) {
 
 // Create Audio Stream
 async function connectToAudioStream() {
-    const stream = await navigator.mediaDevices.getUserMedia({ audio: true, video: false});
+    stream = await navigator.mediaDevices.getUserMedia({ audio: true, video: false});
     stopLoading();
 
     const handleSuccess = (stream) => {
@@ -119,5 +120,9 @@ export async function stopRecording(){
     await ws.send(JSON.stringify({
         "type": "stop_request"
     }));
+
+    stream.getTracks().forEach((track) => {
+        track.stop();
+    })
 }
 

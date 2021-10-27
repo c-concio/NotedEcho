@@ -1,5 +1,6 @@
 import React from "react";
 import style from "../styles/Topics.module.css";
+import { setTopicsData } from "../pages/notebookData";
 
 export var changeTopicFunction;
 
@@ -16,6 +17,7 @@ export default class Topics extends React.Component{
 
     changeTopics(newTopics) {
         console.log(newTopics);
+        setTopicsData(newTopics);
         this.setState({
             topics: newTopics
         });

@@ -5,6 +5,7 @@ import React from 'react';
 import { changeTopicFunction } from '../component/Topics';
 import { setTranscriptFunction } from '../component/Transcript';
 import SpeechToText from '../component/SpeechToText';
+import { setNotesData } from './notebookData';
 
 import dynamic from 'next/dynamic';
 const EditorJsWithSSR = dynamic(() => import("../component/Editor"), {ssr : false,});
@@ -37,6 +38,7 @@ export default class Main extends React.Component {
     console.log("Clicked save button");
     editorInstance.save().then((output) => {
         console.log(output);
+        setNotesData(output);
     }).catch(err => {
         console.log(err);
     });
@@ -45,39 +47,13 @@ export default class Main extends React.Component {
   onClickLoad() {
     console.log("Load data to editor");
     
-    let data = {
-      "blocks": [
-        {
-            "type": "paragraph",
-            "data": {
-              "text": "Editor.js"
-            }
-        },
-        {
-            "type": "paragraph",
-            "data": {
-              "text": "Hey. Meet the new Editor. On this page you can see it in action — try to edit this text. Source code of the page contains the example of connection and configuration."
-            }
-        },
-        {
-            "type": "paragraph",
-            "data": {
-              "text": "Key features"
-            }
-        }
-      ]
-    };
-    editorInstance.render(data);
+    // editorInstance.render(data);
   }
 
-  onClickSeek() {
+  async onClickSeek() {
     console.log("Seek button clicked");
 
-    let vid = document.getElementById("vid");
-    
-    
-    console.log(vid.currentTime)
-    vid.currentTime = 100;
+    await fetch("./api/AstraDB/PostDocument");
   }
 
   async onClickGetTopics() {
@@ -122,7 +98,7 @@ export default class Main extends React.Component {
           <div className="right-col">
             <div className="flex-col">
               <Toolbar onClickFunctions={this.onClickFunctions}/>
-              <EditorJsWithSSR style={{"flex-grow":8}}/>
+              <EditorJsWithSSR style={{"flexGrow":8}}/>
             </div>
           </div>
         </div>
