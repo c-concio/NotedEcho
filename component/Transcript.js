@@ -3,8 +3,11 @@ import React from "react"
 export var setTranscriptFunction;
 
 export default class Transcript extends React.Component{
+
     constructor(props){
         super(props);
+        
+        this.endDivRef = React.createRef();
 
         this.state = {
             messages: []
@@ -15,9 +18,14 @@ export default class Transcript extends React.Component{
     }
 
     setTranscript(msg) {
+        console.log("set transcript");
         this.setState({
             messages: msg
         });
+    }
+
+    componentDidUpdate() {
+        this.endDivRef.current.scrollIntoView({behavior: "smooth"});
     }
 
     render() {
@@ -25,9 +33,10 @@ export default class Transcript extends React.Component{
             <div>
                 {
                     this.state.messages.map((element, index) => {
-                        return (<p key={`message${index}`}>{element.text}</p>);
+                        return (<p key={`message${index}`}>{element}</p>);
                     })
                 }
+                <div ref={this.endDivRef}/>
             </div>
         )
     }

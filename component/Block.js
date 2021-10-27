@@ -1,6 +1,7 @@
 import React from 'react';
 import Topics from './Topics';
 import Transcript from './Transcript';
+import SpeechToText from './SpeechToText';
 
 export default class Block extends React.Component{
     constructor(props){
@@ -19,6 +20,8 @@ export default class Block extends React.Component{
                 {this.props.title &&
                     <h2 style={{textAlign: 'center', marginTop: 0, marginBottom: "10px"}}>{this.props.title}</h2>
                 }
+
+                {(this.props.type == "recording") && <SpeechToText/>}
 
                 {(this.props.type == "video") &&
                     <video id="vid" width="100%" height="100%" controls>

@@ -113,7 +113,7 @@ export default class Main extends React.Component {
 
         <div className="flex-row">
           <div className="flex-col left-col">
-            <Block type="video"/>
+            <Block type="recording"/>
             <Block type="transcript" title="Transcript"/>
             <Block type="topics" title="Topics"/>
           </div>
