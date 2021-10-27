@@ -4,6 +4,8 @@ body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+
+  background-color: rgb(37, 37, 37);
 }
 
 a {
@@ -16,6 +18,7 @@ a {
 }
 
 
+ 
 .cdx-block{
   width: 100%;
   max-width: 100% !important;
@@ -26,10 +29,17 @@ a {
 } 
 
 .box-border{
-  border-color: black;
-  border: 1px solid black;
-  box-shadow: 10px 10px;
-  margin: 16px;
+  border: 3px solid rgb(209, 123, 11);
+  box-shadow: 3px 3px rgb(209, 123, 11);
+  margin: 8px;
+  border-radius: 10px;
+  background-color: rgb(233, 233, 233);
+}
+
+.box-border:hover{
+  border: 5px solid rgb(245, 163, 57);
+  box-shadow: 5px 5px rgb(245, 163, 57);
+  
 }
 
 #editor-div{
@@ -44,6 +54,7 @@ a {
   scrollbar-width: thin;
   scrollbar-color: rgba(170, 170, 170, 0.4) white;
 }
+
 
 .block-div::-webkit-scrollbar-thumb{
   background: rgba(228, 228, 228, 0.6);
@@ -76,7 +87,7 @@ a {
 
 #toolbar{
   flex-basis: 40px;
-  margin: 16px;
+  margin: 8px;
   margin-bottom: 0;
   padding: 10px;
 }
@@ -85,6 +96,10 @@ a {
   float: right;
   align-self:center;
   justify-content: center;
+}
+
+#toolbarButtons button{
+  margin: 3px;
 }
 
 .left-col{
@@ -97,7 +112,7 @@ a {
 
 @keyframes recordButtonOn {
   0% {background-color: rgb(180, 37, 37)}
-  50% {background-color: red}
+  50% {background-color: rgb(250, 13, 13)}
   100% {background-color: rgb(180, 37, 37)}
 }
 
@@ -175,4 +190,46 @@ a {
 #loadNotebookDiv button{
   padding: 5px;
   margin: 3px;
+}
+
+#editButton{
+  background-color: unset;
+  border: unset;
+  font-size: 20px;
+  transform: translateY(3px);
+  color: rgba(255, 131, 15, 0.8);
+  cursor: pointer;
+}
+
+#editButton:hover{
+  color: rgba(255, 131, 15, 1);
+}
+
+#titleSaveButton{
+  background-color: unset;
+  border: unset;
+  font-size: 20px;
+  transform: translateY(3px);
+  color: rgba(255, 131, 15, 0.8);
+  cursor: pointer;
+}
+
+#titleSaveButton:hover{
+  color: rgba(255, 158, 47, 1);
+}
+
+#toolbarButtons button{
+  background-color: orange;
+  color: rgb(0, 0, 0);
+  padding: 10px;
+  border: unset;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  cursor: pointer;
+}
+
+#toolbarButtons button:hover{
+  font-size: 0.8rem;
+  margin: 4px;
 }

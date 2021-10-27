@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Script from 'next/script';
 import Block from '../component/Block';
 import Toolbar from '../component/Toolbar';
 import React from 'react';
@@ -143,7 +144,7 @@ export default class Main extends React.Component {
 
   render() {
     return (
-      <div>
+      <div id="main-div">
         {this.state.showLoadNotebook && <LoadNotebook notebooks={this.state.notebookTitles} onClick={this.onClickNotebookLoad} onClickBackground={this.onClickLoadNotebookBackground}/>}
 
         <div className="flex-row">
@@ -161,7 +162,7 @@ export default class Main extends React.Component {
           </div>
         </div>
 
-
+        <Script src="https://kit.fontawesome.com/7aa3148cb6.js" crossOrigin="anonymous"></Script>
       </div>
     )
   }

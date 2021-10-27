@@ -22,6 +22,7 @@ export default class Toolbar extends React.Component{
     }
 
     async onClickSaveButton() {
+        document.getElementById("notebookTitle").contentEditable = false;
         this.setState({titleChanged: false, showEditButton: true});
 
         await fetch('./api/AstraDB/DeleteDocument', {
@@ -33,6 +34,7 @@ export default class Toolbar extends React.Component{
             this.props.onClickFunctions.onClickSave();
         }).catch((err) => { 
         })
+
     }
 
     
@@ -42,7 +44,10 @@ export default class Toolbar extends React.Component{
             showEditButton: false
         })
         this.oldTitle = document.getElementById("notebookTitle").textContent;
-        document.getElementById("notebookTitle").contentEditable = true;
+        
+        let title = document.getElementById("notebookTitle");
+        title.contentEditable = true;
+        title.focus();
     }
 
     render(){
@@ -52,16 +57,16 @@ export default class Toolbar extends React.Component{
                     <h1 id="notebookTitle" contentEditable="false" suppressContentEditableWarning={true}>New Notebook</h1>
                     
                     {this.state.titleChanged &&
-                        <button onClick={this.onClickSaveButton}>Save Title</button>
+                        <button id="titleSaveButton" onClick={this.onClickSaveButton} className="far fa-save"></button>
                     }
 
                     {this.state.showEditButton &&
-                        <button onClick={this.onClickEditButton}>Edit</button>}
+                        <button id="editButton" onClick={this.onClickEditButton} className="fas fa-edit"></button>}
                 </div>
                 <div id="toolbarButtons">
-                    <button onClick={this.props.onClickFunctions.onClickNewNotebook}>New Notebook</button>
                     <button onClick={this.props.onClickFunctions.onClickSave}>Save</button>
                     <button onClick={this.props.onClickFunctions.onClickDeleteButton}>Delete</button>
+                    <button onClick={this.props.onClickFunctions.onClickNewNotebook}>New Notebook</button>
                     <button onClick={this.props.onClickFunctions.onClickViewNotebooks}>View Notebooks</button>
                 </div>
             </div>
