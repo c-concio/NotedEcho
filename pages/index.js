@@ -7,6 +7,7 @@ import { setTranscriptFunction } from '../component/Transcript';
 import SpeechToText from '../component/SpeechToText';
 import { setNotesData } from './notebookData';
 import { transcript, topics, notes } from './notebookData';
+import LoadNotebook from '../component/LoadNotebook';
 
 import dynamic from 'next/dynamic';
 const EditorJsWithSSR = dynamic(() => import("../component/Editor"), {ssr : false,});
@@ -25,14 +26,19 @@ export default class Main extends React.Component {
 
     this.onClickSave = this.onClickSave.bind(this);
     this.onClickLoad = this.onClickLoad.bind(this);
+    this.onClickViewNotebooks = this.onClickViewNotebooks.bind(this);
+    this.onClickLoadNotebookBackground = this.onClickLoadNotebookBackground.bind(this);
+
+    this.state = {
+      showLoadNotebook: false
+    }
 
     this.onClickFunctions = {
       onClickSave: this.onClickSave,
       onClickLoad: this.onClickLoad,
-      onClickSeek: this.onClickSeek,
-      onClickGetTopics: this.onClickGetTopics,
-      onClickGetTranscript: this.onClickGetTranscript
+      onClickViewNotebooks: this.onClickViewNotebooks
     }
+
   }
 
   async onClickSave() {
@@ -64,36 +70,31 @@ export default class Main extends React.Component {
     // editorInstance.render(data);
   }
 
-  async onClickSeek() {
-    console.log("Seek button clicked");
+  async onClickViewNotebooks() {
+    await fetch("./api/AstraDB/GetDocuments").then((res) => res.json())
+    .then((obj) => {
+        console.log(Object.getOwnPropertyNames(obj.data))
 
-    await fetch("./api/AstraDB/PostDocument");
+
+        // this.notebookTitles = Object.getOwnPropertyNames(obj.data);
+        this.setState({
+          showLoadNotebook: true,
+          notebookTitles: Object.getOwnPropertyNames(obj.data)
+        });
+
+    }).catch((err) => {
+        console.log(err);
+    })
   }
 
-  async onClickGetTopics() {
-    // get the topics using fetch
-    await fetch("./api/GetTopics")
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        // send the data to the topics block
-        changeTopicFunction(data.topics);
-      })
-      .catch((err) => {
-        console.log(err);
-      })
+  onClickNotebookLoad(element) {
+    console.log("clicked ", element);
   }
 
-  async onClickGetTranscript() {
-    await fetch("./api/GetMessages")
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        setTranscriptFunction(data.messages);
-      })
-      .catch((err) => {
-        console.log(err);
-      })
+  onClickLoadNotebookBackground() {
+    this.setState({
+      showLoadNotebook: false
+    })
   }
 
 
@@ -101,6 +102,7 @@ export default class Main extends React.Component {
   render() {
     return (
       <div>
+        {this.state.showLoadNotebook && <LoadNotebook notebooks={this.state.notebookTitles} onClick={this.onClickNotebookLoad} onClickBackground={this.onClickLoadNotebookBackground}/>}
 
         <div className="flex-row">
           <div className="flex-col left-col">

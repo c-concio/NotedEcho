@@ -6,7 +6,6 @@ export default async function (req, res){
     // post into db the transcript, topics, and notes
 
     console.log("request:")
-    res.status(200).send("ok");
     let reqBody = JSON.parse(req.body);
 
     let data = {
@@ -14,6 +13,8 @@ export default async function (req, res){
         transcript: reqBody.transcript,
         topics: reqBody.topics
     };
+
+    console.log(data);
 
     await axios.put(`${baseAstraUrl}/api/rest/v2/namespaces/${process.env.ASTRA_DB_KEYSPACE}/collections/${collection}/${reqBody.title}`, 
     data,
