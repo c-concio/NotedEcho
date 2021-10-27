@@ -2,6 +2,7 @@ import React from 'react';
 import Topics from './Topics';
 import Transcript from './Transcript';
 import SpeechToText from './SpeechToText';
+import MediaSelect from './MediaSelect';
 
 export default class Block extends React.Component{
     constructor(props){
@@ -16,7 +17,7 @@ export default class Block extends React.Component{
 
     render() {
         return(
-            <div  className="box-border block-div" style={{"overflow" : this.props.type == "video" ? "hidden" : "auto"}}>
+            <div  className="box-border block-div" style={{"overflow" : this.props.type == "video" ? "hidden" : "auto", "flex-grow" : this.props.flexGrow}}>
                 {this.props.title &&
                     <h2 style={{textAlign: 'center', marginTop: 0, marginBottom: "10px"}}>{this.props.title}</h2>
                 }
@@ -32,6 +33,8 @@ export default class Block extends React.Component{
                 { (this.props.type == "topics") && <Topics/> }
 
                 { (this.props.type == "transcript") && <Transcript/>}
+
+                { (this.props.type == "mediaSelect") && <MediaSelect/>}
 
             </div>
         )

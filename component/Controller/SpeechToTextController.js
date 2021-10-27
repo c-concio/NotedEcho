@@ -1,9 +1,12 @@
 import { setTranscriptFunction } from "../Transcript";
+import { stopLoading } from "../SpeechToText";
+import { changeTopicFunction } from "../Topics";
 
 var ws;
 var recorder;
 
 var messageData = [];
+var topicsData = [];
 
 async function connectToWS(authToken) {
     // stream speech to text
@@ -38,6 +41,8 @@ async function connectToWS(authToken) {
             case 'topic_response':
                 for(let topic of data.topics){
                     console.log('Topic detected', topic.phrases);
+                    topicsData.push(topic.phrases);
+                    changeTopicFunction(topicsData);
                 }
                 break;
 
@@ -50,6 +55,7 @@ async function connectToWS(authToken) {
 
     ws.onclose = (event) => {
         console.info('Connection to websocket closed');
+        stopLoading();
     }
 
     // when connection to symbl websocket is open:
@@ -71,6 +77,7 @@ async function connectToWS(authToken) {
 // Create Audio Stream
 async function connectToAudioStream() {
     const stream = await navigator.mediaDevices.getUserMedia({ audio: true, video: false});
+    stopLoading();
 
     const handleSuccess = (stream) => {
     const AudioContext = window.AudioContext;
@@ -104,12 +111,12 @@ export async function startRecording(){
     await fetch('./api/GetAuthToken').then((res) => res.json()).then((data) => {
         authToken = data.authToken;
     })
-    connectToWS(authToken);
-    connectToAudioStream();
+    await connectToWS(authToken);
+    await connectToAudioStream();
 }
 
-export function stopRecording(){
-    ws.send(JSON.stringify({
+export async function stopRecording(){
+    await ws.send(JSON.stringify({
         "type": "stop_request"
     }));
 }

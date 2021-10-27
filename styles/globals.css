@@ -35,12 +35,11 @@ a {
 #editor-div{
   overflow: auto;
   flex-grow: 1;
-
 }
 
 .block-div{
   padding: 10px;
-  flex: 1 1 0px;
+  /* flex: 1 1 0px; */
   overflow: auto;
   scrollbar-width: thin;
   scrollbar-color: rgba(170, 170, 170, 0.4) white;
@@ -92,5 +91,53 @@ a {
 
 .right-col{
   width: 75%;
+}
+
+@keyframes recordButtonOn {
+  0% {background-color: rgb(180, 37, 37)}
+  50% {background-color: red}
+  100% {background-color: rgb(180, 37, 37)}
+}
+
+
+
+#recordingIcon{
+  display: inline-block;
+  height: 25px;
+  width: 25px;
+  background-color: grey;
+  border-radius: 50%;
+  margin: 5px;
+  animation-name: none;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+}
+
+.loadingBackground{
+  background-color: rgba(59, 59, 59, 0.8);
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+  position: absolute;
+}
+
+@keyframes loadingRotation {
+  from {transform: translate(-50%, -50%) rotate(0deg);}
+  to {transform: translate(-50%, -50%) rotate(360deg);}
+}
+
+.loadingIcon{
+  height: 25px;
+  width: 25px;
+  border: 5px dashed orange;
+  border-radius: 50%;
+  position:absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation-name: loadingRotation;
+  animation-duration: 4s;
+  animation-iteration-count: infinite;
 }
 

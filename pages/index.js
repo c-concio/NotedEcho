@@ -4,6 +4,7 @@ import Toolbar from '../component/Toolbar';
 import React from 'react';
 import { changeTopicFunction } from '../component/Topics';
 import { setTranscriptFunction } from '../component/Transcript';
+import SpeechToText from '../component/SpeechToText';
 
 import dynamic from 'next/dynamic';
 const EditorJsWithSSR = dynamic(() => import("../component/Editor"), {ssr : false,});
@@ -113,9 +114,9 @@ export default class Main extends React.Component {
 
         <div className="flex-row">
           <div className="flex-col left-col">
-            <Block type="recording"/>
-            <Block type="transcript" title="Transcript"/>
-            <Block type="topics" title="Topics"/>
+            <SpeechToText/>
+            <Block type="transcript" title="Transcript" flexGrow="1"/>
+            <Block type="topics" title="Topics" flexGrow="0.3"/>
           </div>
 
           <div className="right-col">

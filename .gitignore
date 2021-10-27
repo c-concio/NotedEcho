@@ -35,3 +35,5 @@ yarn-error.log*
 
 # sample video
 /public/sample_video.mp4
+/public/sample_audio.mp3
+/sample_audio.mp3

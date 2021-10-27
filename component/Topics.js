@@ -26,7 +26,7 @@ export default class Topics extends React.Component{
             <ul id={style.topicsList}>
                 {
                     this.state.topics.map((element, index) => {
-                        return (<li className={style.listItem} key={`topic${index}`}>{element.text}</li>)
+                        return (<li className={style.listItem} key={`topic${index}`}>{element}</li>)
                     })
                 }
             </ul>
