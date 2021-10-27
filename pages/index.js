@@ -162,6 +162,9 @@ export default class Main extends React.Component {
           </div>
         </div>
 
+        <Head>
+          <title>Noted Echo</title>
+        </Head>
         <Script src="https://kit.fontawesome.com/7aa3148cb6.js" crossOrigin="anonymous"></Script>
       </div>
     )
