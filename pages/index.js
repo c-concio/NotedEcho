@@ -25,9 +25,9 @@ export default class Main extends React.Component {
     this.check = false;
 
     this.onClickSave = this.onClickSave.bind(this);
-    this.onClickLoad = this.onClickLoad.bind(this);
     this.onClickViewNotebooks = this.onClickViewNotebooks.bind(this);
     this.onClickLoadNotebookBackground = this.onClickLoadNotebookBackground.bind(this);
+    this.onClickDeleteButton = this.onClickDeleteButton.bind(this);
 
     this.state = {
       showLoadNotebook: false
@@ -35,8 +35,8 @@ export default class Main extends React.Component {
 
     this.onClickFunctions = {
       onClickSave: this.onClickSave,
-      onClickLoad: this.onClickLoad,
-      onClickViewNotebooks: this.onClickViewNotebooks
+      onClickViewNotebooks: this.onClickViewNotebooks,
+      onClickDeleteButton: this.onClickDeleteButton
     }
 
   }
@@ -64,17 +64,10 @@ export default class Main extends React.Component {
 
   }
 
-  onClickLoad() {
-    console.log("Load data to editor");
-    
-    // editorInstance.render(data);
-  }
 
   async onClickViewNotebooks() {
     await fetch("./api/AstraDB/GetDocuments").then((res) => res.json())
     .then((obj) => {
-        console.log(Object.getOwnPropertyNames(obj.data))
-
 
         // this.notebookTitles = Object.getOwnPropertyNames(obj.data);
         this.setState({
@@ -87,13 +80,51 @@ export default class Main extends React.Component {
     })
   }
 
-  onClickNotebookLoad(element) {
-    console.log("clicked ", element);
-  }
-
   onClickLoadNotebookBackground() {
     this.setState({
       showLoadNotebook: false
+    })
+  }
+
+  async onClickNotebookLoad(selectedNotebook){
+    console.log("clicked")
+    await fetch('./api/AstraDB/GetDocumentDetails', {
+      method: "POST",
+      body: selectedNotebook
+    }).then((res) => res.json()).then((d) => {
+      let data = d.data;
+      // check if it has topics
+      if(data.hasOwnProperty("notes")){
+        // load in editor
+        console.log(data.notes)
+        if(data.notes.blocks.length == 0)
+          editorInstance.clear();
+        else
+          editorInstance.render(data.notes);
+      }
+      if(data.hasOwnProperty("topics")){
+        changeTopicFunction(data.topics);
+      }
+      if(data.hasOwnProperty("transcript")){
+        setTranscriptFunction(data.transcript);
+      }
+      document.getElementById("notebookTitle").textContent = d.documentId;
+    });
+  }
+
+  async onClickDeleteButton() {
+    console.log("clicked")
+    editorInstance.save().then((data) => {
+      console.log(data)
+    })
+    await fetch('./api/AstraDB/DeleteDocument', {
+        method: 'POST',
+        body: JSON.stringify({
+            oldTitle: document.getElementById("notebookTitle").textContent
+        })
+    }).then((msg) => {
+        document.getElementById("notebookTitle").textContent = "New Notebook";
+        editorInstance.clear();
     })
   }
 

@@ -30,12 +30,12 @@ export default class Toolbar extends React.Component{
                 oldTitle: this.oldTitle
             })
         }).then((msg) => {
-            console.log(notes);
             this.props.onClickFunctions.onClickSave();
         }).catch((err) => { 
-            console.log(notes);
         })
     }
+
+    
 
     onClickEditButton() {
         this.setState({
@@ -49,7 +49,7 @@ export default class Toolbar extends React.Component{
         return (
             <div id="toolbar" className="box-border flex-row">
                 <div style={{"flexGrow": 1, height: "max-content"}} className="flex-row">
-                    <h1 id="notebookTitle" contentEditable="false" suppressContentEditableWarning={true}>Notebook 1</h1>
+                    <h1 id="notebookTitle" contentEditable="false" suppressContentEditableWarning={true}>New Notebook</h1>
                     
                     {this.state.titleChanged &&
                         <button onClick={this.onClickSaveButton}>Save Title</button>
@@ -59,8 +59,8 @@ export default class Toolbar extends React.Component{
                         <button onClick={this.onClickEditButton}>Edit</button>}
                 </div>
                 <div id="toolbarButtons">
-                    <button onClick={this.props.onClickFunctions.onClickSave}>SAVE</button>
-                    <button onClick={this.props.onClickFunctions.onClickLoad}>LOAD</button>
+                    <button onClick={this.props.onClickFunctions.onClickSave}>Save</button>
+                    <button onClick={this.props.onClickFunctions.onClickDeleteButton}>Delete</button>
                     <button onClick={this.props.onClickFunctions.onClickViewNotebooks}>View Notebooks</button>
                 </div>
             </div>

@@ -13,7 +13,7 @@ export default class LoadNotebook extends React.Component{
                     <h3>Select Notebook</h3>
                     {
                         this.props.notebooks.map((element, id) => {
-                            return (<button key={id} onClick={this.props.onClick}>{element}</button>)
+                            return (<button key={id} onClick={() => {this.props.onClick(element)}}>{element}</button>)
                         })
                     }
                 </div>
