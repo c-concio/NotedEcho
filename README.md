@@ -28,3 +28,21 @@ ASTRA_DB_APPLICATION_TOKEN=""
 ```
 
 Once done, simiply open a terminal at the root directory and ```run dev start``` for the development version
+<br></br>
+# Video Demo
+
+### Text Editor functionality
+https://user-images.githubusercontent.com/35528192/139710242-52d88b09-96c0-487f-8f14-5091f1a660b0.mp4
+
+<br></br>
+
+### Saving Notebooks and retrieving notebooks from the Astra Database
+https://user-images.githubusercontent.com/35528192/139709709-108a6aee-bf57-4b8a-a2dc-8ccc98c73ea8.mp4
+
+<br></br>
+
+### Speech to text functionality
+https://user-images.githubusercontent.com/35528192/139710783-88a4d4fc-cdb5-4431-825f-42c5464d73f1.mp4
+
+
+
