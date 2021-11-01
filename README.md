@@ -1,34 +1,30 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Noted Echo
+Noted Echo is a web application that uses Symbl.ai's conversation intelligence API to transcribe live recordings and output the conversation topics. In addition, Noted Echo provides users with a text editor, implemented by the use of Editor JS, to type down notes. This is particularily useful for people that may have trouble hearing or concentrating because the speech transcription allows then to backtrack whenever they need to.
 
-## Getting Started
+Noted echo has the ability to save the notes, transcriptions, and topics as notebooks. These notebooks are saved onto a database that is implemented by the use of the AstraDB Api by Datastax.
 
-First, run the development server:
 
-```bash
-npm run dev
-# or
-yarn dev
+
+## Technologies Used
+Noted Echo was built using Next JS as the front end framework as well as Editor JS for the editor.
+The back end was developed using Next JS's API routes and Node JS, as well as AstraDB for the database.
+
+
+## Demo
+The application can currently only be run using localhost. 
+
+An account for both Symbl.ai and AstraDB is required in order to obtain the keys required to access the API.
+The keys need to be stored in a file named ".end.local" in the root directory.
+The file should have the following variables filled and placed in ".env.local"
+
+```
+SYMBL_ID=""
+SYMBL_SECRET=""
+
+ASTRA_DB_ID=""
+ASTRA_DB_REGION=""
+ASTRA_DB_KEYSPACE=""
+ASTRA_DB_APPLICATION_TOKEN=""
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Once done, simiply open a terminal at the root directory and ```run dev start``` for the development version
